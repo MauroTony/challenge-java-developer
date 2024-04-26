@@ -2,6 +2,7 @@ package br.com.neurotech.challenge.service.impl;
 
 import br.com.neurotech.challenge.entity.CreditType;
 import br.com.neurotech.challenge.entity.NeurotechClient;
+import br.com.neurotech.challenge.exception.ClientNotFoundException;
 import br.com.neurotech.challenge.repository.CreditTypeRepository;
 import br.com.neurotech.challenge.repository.NeurotechClientRepository;
 import br.com.neurotech.challenge.service.ClientService;
@@ -51,6 +52,6 @@ public class ClientServiceImpl implements ClientService {
 	@Transactional(readOnly = true)
 	public NeurotechClient get(String id) {
 		log.debug("Retrieving client with ID: {}", id);
-		return clientRepository.findById(Long.parseLong(id)).orElse(null);
+		return clientRepository.findById(Long.parseLong(id)).orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + " not found."));
 	}
 }

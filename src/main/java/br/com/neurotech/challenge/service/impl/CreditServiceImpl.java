@@ -1,4 +1,4 @@
-package br.com.neurotech.challenge.service;
+package br.com.neurotech.challenge.service.impl;
 
 import br.com.neurotech.challenge.entity.NeurotechClient;
 import br.com.neurotech.challenge.entity.CreditType;
@@ -6,6 +6,7 @@ import br.com.neurotech.challenge.exception.CreditCheckException;
 import br.com.neurotech.challenge.repository.NeurotechClientRepository;
 import br.com.neurotech.challenge.repository.CreditTypeRepository;
 import br.com.neurotech.challenge.entity.VehicleModel;
+import br.com.neurotech.challenge.service.CreditService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class CreditServiceImpl implements CreditService {
 	@Override
 	@Transactional(readOnly = true)
 	public CreditType getCreditType(Long clientId) {
-		return creditTypeRepository.findById(clientId).orElse(null);
+		return creditTypeRepository.findById(clientId).orElseThrow(() -> new CreditCheckException("Credit type not found for client ID " + clientId));
 	}
+
 }
