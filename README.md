@@ -48,6 +48,16 @@ Para executar o projeto, você pode usar o Maven ou o Docker.
 ```bash
 mvn spring-boot:run
 ```
+### Usando Docker
+
+Para executar o projeto em um contêiner Docker, você pode usar o comando abaixo:
+
+```bash
+docker build -t myapplication .  
+docker run -p 5000:5000 myapplication
+```
+
+### Acessando a Documentação da API
 A Documentação da API pode ser acessada em `http://localhost:5000/swagger-ui/index.html`.
 
 ### Executando testes
