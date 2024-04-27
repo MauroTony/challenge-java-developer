@@ -6,7 +6,6 @@ import static org.mockito.Mockito.*;
 import br.com.neurotech.challenge.entity.NeurotechClient;
 import br.com.neurotech.challenge.entity.VehicleModel;
 import br.com.neurotech.challenge.repository.NeurotechClientRepository;
-import br.com.neurotech.challenge.service.CreditServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

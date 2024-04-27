@@ -1,8 +1,10 @@
 package br.com.neurotech.challenge.service;
 
+import br.com.neurotech.challenge.exception.ClientNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.neurotech.challenge.entity.NeurotechClient;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public interface ClientService {
@@ -19,4 +21,5 @@ public interface ClientService {
 	 */
 	NeurotechClient get(String id);
 
+    void deleteClient(Long clientId) throws ClientNotFoundException;
 }

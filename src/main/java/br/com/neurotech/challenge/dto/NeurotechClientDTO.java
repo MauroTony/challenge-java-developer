@@ -1,6 +1,7 @@
 package br.com.neurotech.challenge.dto;
 import jakarta.validation.constraints.*;
 
+
 public record NeurotechClientDTO (
     @NotNull(message = "O nome não pode ser nulo")
     @Size(min = 1, message = "O nome não pode estar vazio")

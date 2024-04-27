@@ -14,7 +14,6 @@ public class CreditType {
     @Enumerated(EnumType.STRING)
     private CreditOption creditOption;
 
-    //@JoinColumn(name = "client_id")
     @ManyToOne
     private NeurotechClient client;
 

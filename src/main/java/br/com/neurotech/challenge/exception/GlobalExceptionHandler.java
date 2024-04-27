@@ -19,6 +19,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(VehicleNotFoundException.class)
+    public ResponseEntity<Object> handleVehicleNotFoundException(VehicleNotFoundException ex) {
+        BodyError errors = new BodyError();
+        errors.setMessage("Vehicle Model not found");
+        errors.setDetails(ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(CreditCheckException.class)
     public ResponseEntity<Object> handleCreditCheckException(CreditCheckException ex) {
         BodyError errors = new BodyError();
