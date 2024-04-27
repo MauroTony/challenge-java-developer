@@ -1,39 +1,69 @@
 # Avaliação para admissão de Desenvolvedores para a Neurotech
 
-## Instruções
+# Projeto de Avaliação de Crédito - Neurotech
 
-- Realize o fork deste projeto para desenvolver a sua solução. Não serão aceitos commits diretamente para este repositório;
-- Após o desenvolvimento da sua solução, nos avise, enviando o link do seu projeto para que iniciemos a avaliação. **Não crie Pull Requests!**
-- A solução deve ser entregue em um prazo máximo de 3 dias. 
+Este projeto é uma API RESTful desenvolvida com Spring Boot, que visa avaliar e aplicar diferentes modalidades de crédito para clientes pessoa física com base em critérios específicos.
 
-## Descrição
+## Funcionalidades
 
-Trata-se de um projeto que avalia e aplica modalidades diferentes de crédito a clientes PF, de acordo com critérios específicos. As modalidades diferentes de crédito estão descritas a seguir:
+- **Cadastro de Clientes:** Permite o cadastro de clientes, armazenando informações como nome, idade e renda.
+- **Consulta de Clientes:** Permite consultar os dados de um cliente específico por ID.
+- **Verificação de Elegibilidade:** Verifica a elegibilidade de um cliente para contratação de credito automotivo.
+- **Deleta Cliente:** Deleta um cliente específico por ID.
+- **Verificação de Tipo de Crédito:** Verifica o tipo de crédito definido para o cliente com base em critérios como idade e renda.
+- **Consulta de Perfis com Elegibilidade para Veiculos do tipo Hatch e Suv:** Retorna uma lista de clientes elegíveis para crédito automotivo do tipo Hatch e Suv.
+- **Testes Automatizados:** Inclui testes unitários e de integração para garantir a qualidade do código.
+- **Dockerização:** A aplicação está preparada para ser executada em contêineres Docker, facilitando o deploy e a escalabilidade.
 
--   Crédito com Juros fixos: Aplicado a clientes com idade entre 18 e 25 anos, independente de renda. Taxa de 5% a.a
--   Crédito com Juros variáveis: Aplicado a clientes com idade entre 21 e 65 anos, com renda entre R$ 5000,00 e R$ 15000,00.
--   Crédito Consignado: Aplicado a clientes acima de 65 anos, independente de renda.
+## Tecnologias Utilizadas
 
-O projeto deve ser implantado como uma API RESTful, utilizando a linguagem Java e o framework Springboot. Atentar para implementações típicas de uma API RESTful, como códigos HTTP para cada tipo de endpoint, validação de dados, Documentação utilizando Swagger, e também testes automáticos para os endpoints implementados.
+- **Spring Boot:** Framework para desenvolvimento de aplicações Java.
+- **Java:** Versão 21.
+- **Maven:** Gerenciador de dependências e build.
+- **H2 Database:** Banco de dados em memória para facilitar os testes e desenvolvimento.
+- **Docker:** Suporte a contêineres para facilitar o deploy e a execução em diferentes ambientes.
 
-De maneira obrigatória, os seguintes endpoints devem ser implementados:
+## Configuração e Execução
 
--   Endpoint para cadastro de clientes: Deve receber Informações como Nome, idade, renda. Como retorno, uma entrada no header da resposta contendo a URL que identifica o cliente (Ex: [http://localhost/api/client/050](http://localhost/api/client/050)). O nome do header deve ser “Location”.
-    
--   Endpoint para retornar os dados do cliente de acordo com seu ID, indicado na URL (Ex: [http://localhost/api/client/050](http://localhost/api/client/050)). O retorno deve ser um objeto JSON contendo os dados do cliente. Por exemplo:
+### Pré-Requisitos
 
+Antes de começar, você precisa ter instalado em sua máquina as seguintes ferramentas:
+- Git
+- JDK 21
+- Maven
+- Docker (opcional para execução em contêineres)
+
+### Clonando o Projeto
+
+```bash
+git clone https://url_para_seu_projeto/repo.git
+cd nome_do_projeto
 ```
-{ 
-  "Name": "Bob",
-  "Age": 40,
-  "Income": 10000
-}
+
+### Executando o Projeto
+
+Para executar o projeto, você pode usar o Maven ou o Docker.
+
+#### Usando Maven
+```bash
+mvn spring-boot:run
 ```
--   Endpoint para definir se um determinado cliente está apto a oferecer um crédito automotivo para determinado modelo de veículo.
-    -   Hatch: Renda entre R$ 5000,00 e R$15000,00.
-    -   SUV: Renda acima de R$8000,00 e idade superior a 20 anos.
-    
+A Documentação da API pode ser acessada em `http://localhost:5000/swagger-ui/index.html`.
 
-Como adicional, mas não obrigatório, implemente um endpoint para se determinar todos os clientes entre 23 e 49 anos que possuem Crédito com juros fixos e estão aptos a adquirirem crédito automotivo para veículos do tipo Hatch. O objeto de retorno deve conter uma lista com o nome e a renda de cada um destes clientes.
+### Executando testes
 
-Boa sorte!
+Para executar os testes unitários e de integração, utilize o comando abaixo:
+
+```bash
+mvn -Dtest=ClientControllerTest test
+mvn -Dtest=CreditControllerTest test
+mvn -Dtest=NeurotechClientRepositoryTests test
+mvn -Dtest=ClientServiceImplTest test
+mvn -Dtest=CreditServiceImplTest test
+```
+
+### OBSERVAÇÃO
+
+A regra de negocio utilizada na montagem da avaliação abre margens para melhorias e erros:
+A regra montada para a definição dos tipos de crédito abre margem para perfis de clientes que não se encaixam em nenhuma das modalidades de crédito.
+E a mesma regra entra em conflito com a regra de negocio do endpoint extra.
